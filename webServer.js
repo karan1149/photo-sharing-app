@@ -262,8 +262,9 @@ app.get('/commentsOfUser/:id', function (request, response) {
             resultPhotos.forEach(function(photo){
               photo.comments.forEach(function(comment){
                 if (String(comment.user_id) === request.params.id){
-                  comment.file_name = photo.file_name;
+                  var length = comments.length;
                   comments.push(comment);
+                  comments[length]['photo_file_name'] = photo.file_name;
                 }
               });
             });
