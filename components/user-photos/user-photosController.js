@@ -12,7 +12,6 @@ cs142App.controller('UserPhotosController', ['$scope', '$routeParams','$location
     $scope.models = {};
     $scope.models.photos = [];
       $scope.FetchModel("/photosOfUser/" + userId + "/", function(photos){
-        console.log(photos);
         var photosNum = photos.length;
         $scope.$apply(function(){
           $scope.models.photos = photos;
