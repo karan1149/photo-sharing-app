@@ -1,0 +1,4 @@
+md-toolbar {font-size:30px; font-weight:bold; padding:20px;}
+.name {float:left; width:70%}
+.context {width:30%; float:right;}
+.advanced {font-size:18px; float:right}

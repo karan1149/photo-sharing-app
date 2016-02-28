@@ -1,0 +1,20 @@
+div.block {
+  margin:10px;
+  padding:10px;
+  border-bottom: 1px solid rgb(63, 81, 181);
+}
+span.whereabouts{
+  font-style: italic;
+}
+span.commentCount {
+  background-color: red;
+  color: white;
+  border-radius:10px;
+  padding:5px;
+}
+span.photosCount {
+  background-color: green;
+  color: white;
+  border-radius:10px;
+  padding: 5px;
+}

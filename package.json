@@ -1,0 +1,23 @@
+{
+  "name": "project6",
+  "version": "1.0.0",
+  "description": "CS142 Project #6 - Photo Sharing App with DB",
+  "main": "webServer.js",
+  "scripts": {
+    "test": "echo Test your code by opening http://localhost:3000 in your browser.",
+    "jshint": "./node_modules/.bin/jshint --config .jshintrc --exclude=node_modules --exclude=test . || exit 0"
+  },
+  "author": "Mendel Rosenblum <mendel@cs.stanford.edu> (http://www.stanford.edu/~mendel)",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.0",
+    "express": "^4.13.3",
+    "mongoose": "^4.3.4",
+    "angular": "^1.4.9",
+    "angular-animate": "^1.4.9",
+    "angular-aria": "^1.4.9",
+    "angular-material": "^1.0.4",
+    "angular-route": "^1.4.9",
+    "jshint": "^2.9.1-rc2"
+  }
+}

@@ -1,0 +1,6 @@
+<md-card class="padded" ng-repeat="user in models.userList">
+  <h3><a href="#/users/{{user._id}}">{{user.first_name}} {{user.last_name}}</a>
+    <span ng-if="main.advanced">
+    <span class="photosCount">{{user.photosCount}}</span> <span class="commentCount">{{user.commentCount}}</span></h3>
+  </span>
+</md-card>

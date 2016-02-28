@@ -1,0 +1,13 @@
+<md-card ng-if="main.advanced">
+  <span class="prev" ng-if="firstPhoto == false"><a href="#/photos/{{models.user._id}}/{{photoNum - 1}}">Previous photo</a></span><span class="next" ng-if="lastPhoto == false"><a href="#/photos/{{models.user._id}}/{{photoNum + 1}}">Next photo</a></span>
+  <span class="prev disabled" ng-if="firstPhoto == true">Previous photo</span><span class="next disabled" ng-if="lastPhoto == true">Next photo</span>
+</md-card>
+<md-card ng-repeat="photo in models.photos">
+  <md-card-title>{{photo.date_time}}</md-card-title>
+  <img ng-src="/images/{{photo.file_name}}"/>
+  <div class="comments">
+    <div class="block" ng-repeat="comment in photo.comments">
+      <a href="#/users/{{comment.user.id}}">{{comment.user.first_name}} {{comment.user.last_name}}</a> commented on {{comment.date_time}}: {{comment.comment}}
+    </div>
+  </div>
+</md-card>

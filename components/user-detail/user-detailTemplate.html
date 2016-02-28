@@ -1,0 +1,6 @@
+<md-card class="padded">
+  <h3><a href="#/users/{{models.user.id}}">{{models.user.first_name}} {{models.user.last_name}}</a></h3>
+  <h4><span class="whereabouts">{{models.user.occupation}} in {{models.user.location}}</span></h4>
+  {{models.user.description}}<br />
+  <a href="#/photos/{{models.user.id}}"><md-button>View photos</md-button></a>
+</md-card>

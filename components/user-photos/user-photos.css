@@ -1,0 +1,14 @@
+.comments {
+  margin: 10px;
+}
+.next {
+  width:50%;
+  float:right;
+}
+.prev {
+  width: 50%;
+  float: left;
+}
+.disabled{
+  text-decoration: line-through;
+}
