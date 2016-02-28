@@ -249,27 +249,35 @@ app.get('/photosOfUser/:id', function (request, response) {
 app.get('/commentsOfUser/:id', function (request, response) {
   Photo.find({ comments: { $elemMatch: { user_id: request.params.id } } }, function(errPhotos, resultPhotos){
     if (errPhotos){
-      response.status(500).send(errPhotos.message);
+      response.status(400).send(errPhotos.message);
     } else {
       User.findOne({_id: request.params.id}, {first_name: 1, last_name: 1}, function(errUser, resultUser){
-        if (resultUser === null){
+        if (!resultUser){
           response.status(400).send("Invalid ID");
         } else {
           if (errUser){
             response.status(500).send(errUser.message);
           } else {
+
             var comments = [];
+            var toAdd = [];
             resultPhotos.forEach(function(photo){
               photo.comments.forEach(function(comment){
                 if (String(comment.user_id) === request.params.id){
                   var length = comments.length;
                   comments.push(comment);
-                  comments[length]['photo_file_name'] = photo.file_name;
+                  toAdd.push([length, photo.file_name]);
                 }
               });
+
+
             });
+            toAdd.forEach(function(pair){
+              console.log(pair);
+              comments[pair[0]].photo_file_name = pair[1];
+            });
+            resultUser = JSON.parse(JSON.stringify(resultUser));
             comments.forEach(function(comment, index){
-              console.log(comments, index);
               comments[index].user = resultUser;
             });
             if (!response.headersSent) response.status(200).send(comments);
