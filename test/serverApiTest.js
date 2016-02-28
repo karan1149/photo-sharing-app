@@ -21,6 +21,11 @@ var userListProperties = ['first_name', 'last_name', 'id', 'photosCount', 'comme
 var userDetailProperties = ['first_name', 'last_name', 'id',
     'location', 'description', 'occupation'];
 
+// List of user IDs for Mongo
+var mongoIdList = ['56ce43b2900a35f703ca9e29', '56ce43b2900a35f703ca9e2a', '56ce43b2900a35f703ca9e2b', '56ce43b2900a35f703ca9e2c', '56ce43b2900a35f703ca9e2d', '56ce43b2900a35f703ca9e2e'];
+
+var commentProperties = ['comment', 'user_id', "date_time", 'photo_file_name', 'user'];
+
 function assertEqualDates(d1, d2) {
 
     return (new Date(d1).valueOf() === new Date(d2).valueOf());
@@ -270,6 +275,73 @@ describe('CS142 Photo App API - ', function () {
                 });
             });
         });
+
+    });
+
+    describe('test /commentsOfUser/:id', function(done){
+      it('can get the list of users', function (done) {
+          http.get({
+              hostname: host,
+              port: port,
+              path: '/user/list'
+          }, function (response) {
+              var responseBody = '';
+              response.on('data', function (chunk) {
+                  responseBody += chunk;
+              });
+
+              response.on('end', function () {
+                  assert.strictEqual(response.statusCode, 200, 'HTTP response status code not OK');
+                  var userList = JSON.parse(responseBody);
+                  done();
+              });
+          });
+      });
+
+      it('can return a 400 status on an invalid id to commentsOfUser', function (done) {
+          http.get({
+              hostname: host,
+              port: port,
+              path: '/commentsOfUser/1'
+          }, function (response) {
+              var responseBody = '';
+              response.on('data', function (chunk) {
+                  responseBody += chunk;
+              });
+
+              response.on('end', function () {
+                  assert.strictEqual(response.statusCode, 400);
+                  done();
+              });
+          });
+      });
+
+      it('commentsOfUser comment properties are correct', function (done) {
+        mongoIdList.forEach(function(id){
+          http.get({
+              hostname: host,
+              port: port,
+              path: '/commentsOfUser/' + id
+          }, function (response) {
+              var responseBody = '';
+              response.on('data', function (chunk) {
+                  responseBody += chunk;
+              });
+
+              response.on('end', function () {
+                  var responseArray = JSON.parse(responseBody);
+                  console.log(responseArray);
+                  responseArray.forEach(function(comment){
+                    var extraProps = _.difference(Object.keys(removeMongoProperties(comment)), commentProperties);
+                    assert.strictEqual(extraProps.length, 0, 'comment object has extra properties: ' + extraProps);
+                    var deficitProps = _.difference(commentProperties, Object.keys(removeMongoProperties(comment)));
+                    assert.strictEqual(deficitProps.length, 0, 'comment object needs properties: ' + deficitProps);
+                  });
+
+              });
+          });
+        });
+      });
 
     });
 
