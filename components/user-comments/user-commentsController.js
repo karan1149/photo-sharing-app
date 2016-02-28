@@ -8,7 +8,7 @@ cs142App.controller('UserCommentsController', ['$scope', '$routeParams',
      */
     var userId = $routeParams.userId;
     $scope.models = {};
-    $scope.FetchModel("/comments/" + userId + "/", function(comments){
+    $scope.FetchModel("/commentsOfUser/" + userId + "/", function(comments){
       $scope.$apply(function(){
         $scope.models.commentList = comments;
         if (comments.length > 0){
